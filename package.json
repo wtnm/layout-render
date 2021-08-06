@@ -1,6 +1,6 @@
 {
   "name": "layout-render",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "Layout render for react",
   "main": "dist/index.js",
   "scripts": {
