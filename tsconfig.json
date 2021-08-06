@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "module": "commonjs",
+    "jsx": "react",
+    "allowJs": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "pretty": true,
+    "experimentalDecorators": false,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "strictNullChecks": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "lib": [
+      "es5",
+      "es6",
+      "dom"
+    ],
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".git",
+    "dist",
+    "__tests__",
+    "sample"
+  ]
+}
