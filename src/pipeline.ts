@@ -2,7 +2,6 @@
 
 import {getIn, objKeys, push2array, setIn, string2path, intoArray} from "objects-fns";
 import {isArray, isMergeable, isObject, isPromise, isString, isUndefined} from "is-fns";
-import ControlledPromise from './controlled-promise'
 import memoize from 'memoizee'
 
 const isMapFn = (arg: any) => isObject(arg) && arg.$;
@@ -108,32 +107,13 @@ function calcFn(fns: any, args, opts) {
 }
 
 export function processFn(mapFn: any, opts: any = {}) {
-  let promise = new ControlledPromise()
   let normMapFn = normalizeFn(mapFn);
   let args = calcArgs(normMapFn.args, normMapFn.argFns, opts);
   if (isPromise(args)) {
-    (async () => {
-      try {
-        args = await args;
-        let res = await calcFn(normMapFn.$, args, opts);
-        promise.resolve(res);
-      } catch (e) {
-        promise.reject(e);
-      }
+    return (async () => {
+      args = await args;
+      return await calcFn(normMapFn.$, args, opts);
     })()
-    return promise
   }
-  let res = calcFn(normMapFn.$, args, opts);
-  if (isPromise(res)) {
-    (async () => {
-      try {
-        res = await res;
-        promise.resolve(res);
-      } catch (e) {
-        promise.reject(e);
-      }
-    })()
-    return promise
-  }
-  return res;
+  return calcFn(normMapFn.$, args, opts);
 }
